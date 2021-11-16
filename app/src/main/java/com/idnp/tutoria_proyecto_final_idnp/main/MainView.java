@@ -2,7 +2,9 @@ package com.idnp.tutoria_proyecto_final_idnp.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -18,13 +20,18 @@ public class MainView extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
+    SharedPreferences session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvSesion = (TextView) findViewById(R.id.tvSesion);
         presenter = new MainPresenter(this);
+        session = getSharedPreferences("session", Context.MODE_PRIVATE);
+        presenter.chargePreferences(session);
     }
+
 
     public void login(View view){
         Intent login = new Intent(this, LoginView.class);
@@ -38,7 +45,7 @@ public class MainView extends AppCompatActivity implements Main.View {
     }
 
     public void signOut(View view){
-        presenter.signOut();
+        presenter.signOut(session);
     }
 
     @Override
@@ -46,6 +53,17 @@ public class MainView extends AppCompatActivity implements Main.View {
         tvSesion.setText(nombre);
     }
 
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        presenter.chargePreferences(session);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        presenter.validateSession(session);
+    }
 
 
 }

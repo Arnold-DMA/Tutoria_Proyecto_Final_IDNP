@@ -1,5 +1,7 @@
 package com.idnp.tutoria_proyecto_final_idnp.login;
 
+import android.content.SharedPreferences;
+
 import com.idnp.tutoria_proyecto_final_idnp.UsersSQLiteOpenHelper;
 
 public class LoginPresenter implements Login.Presenter{
@@ -14,8 +16,8 @@ public class LoginPresenter implements Login.Presenter{
 
 
     @Override
-    public void login(UsersSQLiteOpenHelper admin, String username, String password, boolean remember) {
-        model.login(admin, username, password, remember);
+    public void login(UsersSQLiteOpenHelper admin, SharedPreferences session, String username, String password, boolean remember) {
+        model.login(admin, session, username, password, remember);
     }
 
     @Override

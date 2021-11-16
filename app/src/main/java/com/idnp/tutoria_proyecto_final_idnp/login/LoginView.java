@@ -2,6 +2,8 @@ package com.idnp.tutoria_proyecto_final_idnp.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +19,12 @@ public class LoginView extends AppCompatActivity implements Login.View{
     private EditText etUsername;
     private EditText etPassword;
     private CheckBox cbRemember;
-    private Button btnLogin;
 
     private UsersSQLiteOpenHelper admin;
 
     private Login.Presenter presenter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +34,17 @@ public class LoginView extends AppCompatActivity implements Login.View{
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         cbRemember = (CheckBox) findViewById(R.id.cbRemember);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
 
         admin = new UsersSQLiteOpenHelper(this,"tutoria", null, 1);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.login(admin, etUsername.getText().toString(), etPassword.getText().toString(), cbRemember.isChecked());
-            }
-        });
+
 
         presenter = new LoginPresenter(this);
+    }
+
+    public void login(View view){
+        SharedPreferences session = getSharedPreferences("session", Context.MODE_PRIVATE);
+        presenter.login(admin, session, etUsername.getText().toString(), etPassword.getText().toString(), cbRemember.isChecked());
     }
 
     @Override

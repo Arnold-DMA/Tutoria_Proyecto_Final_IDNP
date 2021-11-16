@@ -1,7 +1,6 @@
 package com.idnp.tutoria_proyecto_final_idnp.main;
 
-import com.idnp.tutoria_proyecto_final_idnp.main.Main;
-import com.idnp.tutoria_proyecto_final_idnp.main.MainModel;
+import android.content.SharedPreferences;
 
 public class MainPresenter implements Main.Presenter{
 
@@ -21,9 +20,19 @@ public class MainPresenter implements Main.Presenter{
     }
 
     @Override
-    public void signOut() {
+    public void signOut(SharedPreferences session) {
         if(view != null){
-            model.logout();
+            model.logout(session);
         }
+    }
+
+    @Override
+    public void chargePreferences(SharedPreferences session) {
+        model.chargePreferences(session);
+    }
+
+    @Override
+    public void validateSession(SharedPreferences session) {
+        model.validateSession(session);
     }
 }
