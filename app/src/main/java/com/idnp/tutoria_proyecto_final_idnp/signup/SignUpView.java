@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.idnp.tutoria_proyecto_final_idnp.R;
 import com.idnp.tutoria_proyecto_final_idnp.UsersSQLiteOpenHelper;
-import com.idnp.tutoria_proyecto_final_idnp.login.LoginView;
 
 public class SignUpView extends AppCompatActivity implements SignUp.View {
 
@@ -20,6 +19,8 @@ public class SignUpView extends AppCompatActivity implements SignUp.View {
     private RadioButton rbStudent, rbTeacher;
 
     private SignUp.Presenter presenter;
+
+    private UsersSQLiteOpenHelper admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,12 @@ public class SignUpView extends AppCompatActivity implements SignUp.View {
         rbTeacher = (RadioButton) findViewById(R.id.rbTeacher);
 
         presenter = new SignUpPresenter(this);
+
+        admin = new UsersSQLiteOpenHelper(this,"tutoria", null, 1);
     }
 
     public void register(View view){
-        presenter.register(new UsersSQLiteOpenHelper(this,"tutoria", null, 1), etUsername.getText().toString(),
+        presenter.register(admin, etUsername.getText().toString(),
                 etEmail.getText().toString(),
                 etName.getText().toString(),
                 etPaternalSurname.getText().toString(),
