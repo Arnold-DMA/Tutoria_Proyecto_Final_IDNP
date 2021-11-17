@@ -15,7 +15,7 @@ public class UsersSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table users(id int primary key, username text, email text, name text, paternalSurname text, maternalSurname text," +
-                "password text, teachingArea1 int, teachingArea2 int, teachingArea3 int, schedule text)");
+                "password text, teachingArea1 int, teachingArea2 int, teachingArea3 int, latitud double, longitud double, address text, schedule text)");
     }
 
     @Override

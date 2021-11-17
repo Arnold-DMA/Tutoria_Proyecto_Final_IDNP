@@ -48,7 +48,18 @@ public class SignUpModel implements SignUp.Model {
             }
         }
         else if(teacher == true){
-
+            if(!username.isEmpty() && !email.isEmpty() && !name.isEmpty() && !paternalSurname.isEmpty() && !maternalSurname.isEmpty()
+                    && !password.isEmpty() && !repeatPassword.isEmpty()) {
+                if (password.equals(repeatPassword)) {
+                    presenter.continueRegister(new String[]{username, email, name, paternalSurname, maternalSurname, password});
+                }
+                else{
+                    presenter.showMessage(1);
+                }
+            }
+            else{
+                presenter.showMessage(2);
+            }
         }
         else{
             presenter.showMessage(3);

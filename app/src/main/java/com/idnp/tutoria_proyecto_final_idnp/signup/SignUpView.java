@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.idnp.tutoria_proyecto_final_idnp.R;
 import com.idnp.tutoria_proyecto_final_idnp.UsersSQLiteOpenHelper;
+import com.idnp.tutoria_proyecto_final_idnp.secondregister.SecondRegisterView;
 
 public class SignUpView extends AppCompatActivity implements SignUp.View {
 
@@ -73,7 +74,9 @@ public class SignUpView extends AppCompatActivity implements SignUp.View {
 
     @Override
     public void continueRegister(String[] data) {
-        //Intent secondRegister = new Intent(this, SecondRegisterView.class);
-        //startActivity(secondRegister);
+        Intent secondRegister = new Intent(this, SecondRegisterView.class);
+        secondRegister.putExtra("data", data);
+        startActivity(secondRegister);
+        finish();
     }
 }

@@ -26,6 +26,6 @@ public class SignUpPresenter implements SignUp.Presenter {
 
     @Override
     public void continueRegister(String[] data) {
-
+        view.continueRegister(data);
     }
 }
